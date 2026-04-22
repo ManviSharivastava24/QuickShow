@@ -10,6 +10,9 @@ const syncUserCreation =inngest.createFunction(
 },
     async({event})=>{
         await connectDB();
+        if (mongoose.connection.readyState !== 1) {
+            throw new Error("DB not connected");
+          }
         const{id,first_name,last_name,email_addresses,image_url}=event.data
         const userData={
             _id:id,
@@ -28,6 +31,9 @@ const syncUserDeletion =inngest.createFunction(
 },
     async({event})=>{
         await connectDB(); 
+        if (mongoose.connection.readyState !== 1) {
+            throw new Error("DB not connected");
+          }
             const{id}=event.data
             await User.findByIdAndDelete(id)
         
@@ -40,6 +46,9 @@ const syncUserUpdation =inngest.createFunction(
     triggers: [{ event: 'clerk/user.updated' }]},
     async({event})=>{
         await connectDB(); 
+        if (mongoose.connection.readyState !== 1) {
+            throw new Error("DB not connected");
+          }
         const{id,first_name,last_name,email_addresses,image_url}=event.data
              const userData={
                 
@@ -47,7 +56,7 @@ const syncUserUpdation =inngest.createFunction(
                 name:first_name+' '+last_name,
                 image:image_url
              }
-            await User.findByIdAndUpdate(id,userData)
+            await User.findByIdAndUpdate(id, userData, { upsert: true });
         
        
         }
