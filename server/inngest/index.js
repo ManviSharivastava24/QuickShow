@@ -1,6 +1,7 @@
 import { Inngest } from "inngest";
 import User from "../models/user.js";
 import connectDB from "../config/db.js";
+import mongoose from "mongoose";
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 //ingest function to save user data to a database
