@@ -54,6 +54,7 @@
 // }
 import Stripe from "stripe";
 import Booking from "../models/Bookings.js";
+import { inngest } from "../inngest/index.js";
 
 export const stripeWebhooks = async (req, res) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);

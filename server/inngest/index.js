@@ -4,6 +4,7 @@ import User from "../models/user.js";
 import connectDB from "../config/db.js";
 import Booking from "../models/Bookings.js";
 import Show from "../models/Shows.js";
+import sendEmail from "../config/nodeMailer.js";
 // import mongoose from "mongoose";
 
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
