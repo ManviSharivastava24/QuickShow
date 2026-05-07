@@ -96,8 +96,15 @@ export const stripeWebhooks = async (req, res) => {
           isPaid: true,
           paymentLink: ""
         },
+        
         { new: true }
+        //send confimation mail
+       
       );
+      await inngest.send({
+        name:"app/show.booked",
+        data:{bookingId}
+    })
 
       console.log("Updated booking:", updated);
     }
