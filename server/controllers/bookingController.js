@@ -63,6 +63,13 @@ export const createBooking=async(req,res)=>{
            })
            booking.paymentLink=session.url
            await booking.save()
+           //run innngest scheduer function to check payment status ater 10 minutwes 
+           await inngest.send({
+            name: "app/checkpayment",
+            data:{
+                bookingId:booking._id.toString()
+            }
+           })
         res.json({success:true,url:session.url})
     } catch (error) {
         //check if the seat is selected for selected row
