@@ -81,22 +81,25 @@ const SeatLayout = () => {
      
 //    )
 const renderSeats = (row, count = 9) => (
-  <div key={row} className='flex gap-2 mt-2'>
-    <div className='flex flex-wrap items-center justify-center gap-2'>
+  <div key={row} className='mt-2'>
+    <div className='flex items-center justify-center gap-2 min-w-max'>
       {Array.from({ length: count }, (_, i) => {
         const seatId = `${row}${i + 1}`;
-        const isOccupied = occupiedSeats.includes(seatId); // Check occupancy
+        const isOccupied = occupiedSeats.includes(seatId);
 
         return (
           <button
             key={seatId}
             onClick={() => handleSeatClick(seatId)}
-            // Apply dull effect if occupied
             className={`h-8 w-8 rounded border border-primary/60 transition-all
               ${selectedSeats.includes(seatId) ? "bg-primary text-white" : ""}
-              ${isOccupied ? "opacity-20 cursor-not-allowed bg-gray-500/20" : "cursor-pointer hover:bg-primary/10"}
+              ${
+                isOccupied
+                  ? "opacity-20 cursor-not-allowed bg-gray-500/20"
+                  : "cursor-pointer hover:bg-primary/10"
+              }
             `}
-            disabled={isOccupied} // Optional: prevents the click entirely
+            disabled={isOccupied}
           >
             {seatId}
           </button>
@@ -147,7 +150,7 @@ const renderSeats = (row, count = 9) => (
 
   return show ? (
     <div className='flex flex-col md:flex-row px-6 md:x-16 lg:px-40 py-30 md:pt-50'>
-      <div className='w-60 bg-primary/10 border border-primary/20 rounded-lg py-10 h-max md:sticky md:top-30'>
+     <div className='w-full max-w-xs mx-auto md:mx-0 bg-primary/10 border border-primary/20 rounded-lg py-10 h-max md:sticky md:top-30'>
         <p className='text-lg font-semibold px-6'>
           Available Timings
         </p>
@@ -174,19 +177,45 @@ const renderSeats = (row, count = 9) => (
        <h1> Select your Seats</h1>
        <img src={assets.screenImage} alt="screen"/>
        <p className='text-gray-400 text-sm mb-6'>SCREEN SIDE</p>
-       <div className='flex flex-col items-center mt-10 text-xs text-gray-300'>
-        <div className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6'>
-          {groupRows[0].map(row => renderSeats(row))}
-        </div>
-       
-       <div className='grid grid-cols-2 gap-11'>
-        {groupRows.slice(1).map((group,idx)=>(
-          <div key={idx}>
-            {group.map(row=> renderSeats(row))}
-            </div>
-        ))}
-       </div>
+       <div className="mt-10 text-xs text-gray-300 flex justify-center w-full">
+  <div className="scale-75 sm:scale-90 md:scale-100 origin-top">
+
+    {/* A + B */}
+    <div className="flex justify-center gap-14 mb-10">
+      <div>
+        {renderSeats("A")}
+        {renderSeats("B")}
       </div>
+    </div>
+
+    {/* C D | E F */}
+    <div className="flex justify-center gap-20 mb-10">
+      <div>
+        {renderSeats("C")}
+        {renderSeats("D")}
+      </div>
+
+      <div>
+        {renderSeats("E")}
+        {renderSeats("F")}
+      </div>
+    </div>
+
+    {/* G H | I J */}
+    <div className="flex justify-center gap-20">
+      <div>
+        {renderSeats("G")}
+        {renderSeats("H")}
+      </div>
+
+      <div>
+        {renderSeats("I")}
+        {renderSeats("J")}
+      </div>
+    </div>
+
+  </div>
+</div>
       <button onClick={bookTickets} className='flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'>
         Proceed to Checkout
         <ArrowRightIcon strokeWidth={3} className="w-4 h-4" />
