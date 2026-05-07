@@ -150,7 +150,7 @@ const renderSeats = (row, count = 9) => (
 
   return show ? (
     <div className='flex flex-col md:flex-row px-6 md:x-16 lg:px-40 py-30 md:pt-50'>
-     <div className='w-full max-w-xs mx-auto md:mx-0 bg-primary/10 border border-primary/20 rounded-lg py-10 h-max md:sticky md:top-30'>
+     <div className='w-full max-w-xs md:w-60 mx-auto md:mx-0 bg-primary/10 border border-primary/20 rounded-lg py-10 h-max'>
         <p className='text-lg font-semibold px-6'>
           Available Timings
         </p>
