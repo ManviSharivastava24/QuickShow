@@ -13,6 +13,9 @@ const ListBooking = () => {
       const {data}=await axios.get("/api/admin/all-bookings",{
         headers:{Authorization:`Bearer ${await getToken()}`}
       });
+      if (data.success) {
+        setBookings(data.bookings);
+      }
     } catch (error) {
       console.log(error);
     }
