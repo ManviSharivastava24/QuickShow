@@ -4,8 +4,7 @@ import toast from "react-hot-toast";
 import {  useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/react";
 import { useAuth } from "@clerk/react";
-
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 export const AppContext = createContext()
 export const AppProvider = ({ children }) => {
     const [isAdmin, setIsAdmin] = useState(false);
